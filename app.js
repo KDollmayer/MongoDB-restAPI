@@ -1,16 +1,26 @@
 const express = require("express");
+const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 require('dotenv').config()
 
 const app = express()
 const PORT = 3000;
 
+app.use(bodyParser.json())
+const postsRoute = require('./routes/posts.js')
+
+app.use("/posts", postsRoute)
+
+
 
 app.get("/", (req, res) => {
-  res.send("index.ejs");
+  res.send("Home");
 });
 
- mongoose.connect(process.env.keyMongoDb, {
+
+
+
+mongoose.connect(process.env.keyMongoDb, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     
